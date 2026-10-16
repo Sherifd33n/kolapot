@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+    background-color: #ffffff;
+    font-family:
+      "Plus Jakarta Sans",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+  }
+}
+
+/* Custom textured gold text styling */
+.text-gold-textured {
+  background: linear-gradient(
+    180deg,
+    #ffe194 0%,
+    #d49d3b 48%,
+    #936717 85%,
+    #e6af4b 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.45));
+}
+
+.text-gold-glow {
+  text-shadow: 0 0 20px rgba(229, 169, 60, 0.35);
+}
+
+/* Subtle botanical leaf overlay */
+.bg-botanical-pattern {
+  background-image:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(20, 80, 58, 0.4) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(20, 80, 58, 0.35) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(15, 65, 48, 0.5) 0%,
+      transparent 60%
+    );
+}
+
+@font-face {
+  font-family: "Cybrpnuk";
+  src: url("/fonts/cybrpnuk2.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.cybrpnuk-title {
+  font-family: "Cybrpnuk", sans-serif;
+}
+
+/* Obvious & smooth tab entrance animation */
+@keyframes tabSwitchEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.animate-tab-content {
+  animation: tabSwitchEntrance 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity, filter;
+}
