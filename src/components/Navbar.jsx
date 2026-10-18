@@ -22,8 +22,9 @@ export default function Navbar({ onOpenCreateModal, onNavigate }) {
   };
 
   return (
-    <header className="relative z-50 w-full px-6 py-4 md:px-12 lg:px-3 bg-[#0B5D4B]">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 w-full px-6 py-4 md:px-12 lg:px-3 bg-[#0B5D4B]">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Brand Logo */}
         <a
           href="#home"
@@ -227,5 +228,8 @@ export default function Navbar({ onOpenCreateModal, onNavigate }) {
         </div>
       </div>
     </header>
+    {/* Spacer to maintain document flow height for the fixed header */}
+    <div className="h-[72px] md:h-[80px] bg-[#0B5D4B]" aria-hidden="true" />
+  </>
   );
 }
