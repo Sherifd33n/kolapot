@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Groups from "./Groups";
+import Contributions from "./Contributions";
 import {
   Home,
   Users,
@@ -41,11 +42,27 @@ export default function Dashboard({ onNavigate, initialTab = "Home" }) {
   const [activeTab, setActiveTab] = useState(() => {
     if (
       typeof window !== "undefined" &&
-      window.location.hash.toLowerCase().includes("group")
+      (window.location.hash.toLowerCase().includes("group") ||
+        window.location.hash.toLowerCase().includes("invite"))
     ) {
       return "Groups";
     }
+    if (
+      typeof window !== "undefined" &&
+      window.location.hash.toLowerCase().includes("contribution")
+    ) {
+      return "Contributions";
+    }
     return initialTab;
+  });
+  const [groupsInitialView, setGroupsInitialView] = useState(() => {
+    if (
+      typeof window !== "undefined" &&
+      window.location.hash.toLowerCase().includes("invite")
+    ) {
+      return "join-invite";
+    }
+    return null;
   });
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedGroupFilter, setSelectedGroupFilter] =
@@ -382,7 +399,7 @@ export default function Dashboard({ onNavigate, initialTab = "Home" }) {
               onClick={() =>
                 alert("Filter groups: All 3 active Ajo circles selected.")
               }
-              className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-2 bg-white border border-[#E5E0D6] rounded-xl text-xs sm:text-sm font-semibold text-[#1A2E26] shadow-xs hover:bg-[#FDFCF9] transition-all"
+              className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-2 bg-white border border-[#E5E0D6] rounded-md text-xs sm:text-sm font-semibold text-[#1A2E26] shadow-xs hover:bg-[#FDFCF9] transition-all"
             >
               <div className="w-5 h-5 rounded-md bg-[#EBF6F0] text-[#0B6B40] flex items-center justify-center shrink-0">
                 <Users className="w-3.5 h-3.5" />
@@ -395,7 +412,12 @@ export default function Dashboard({ onNavigate, initialTab = "Home" }) {
 
         <div key={activeTab} className="animate-tab-content space-y-6">
           {activeTab === "Groups" ? (
-            <Groups onNavigate={onNavigate} />
+            <Groups
+              onNavigate={onNavigate}
+              initialView={groupsInitialView}
+            />
+          ) : activeTab === "Contributions" ? (
+            <Contributions onNavigate={onNavigate} />
           ) : activeTab === "Home" ? (
             <>
               <div>
@@ -632,7 +654,14 @@ export default function Dashboard({ onNavigate, initialTab = "Home" }) {
                   {quickActions.map((action, idx) => (
                     <button
                       key={idx}
-                      onClick={() => alert(`Triggering: ${action.title}`)}
+                      onClick={() => {
+                        if (action.title === "Join Group With Invite") {
+                          setGroupsInitialView("join-invite");
+                          setActiveTab("Groups");
+                        } else {
+                          alert(`Triggering: ${action.title}`);
+                        }
+                      }}
                       className="flex items-center justify-between p-3.5 rounded-xl border border-[#ECE7DE] bg-white hover:border-[#0B6B40] hover:shadow-xs transition-all text-left group cursor-pointer"
                     >
                       <div className="flex items-center gap-3">

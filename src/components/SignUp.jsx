@@ -55,7 +55,7 @@ export default function SignUp({ onNavigate }) {
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row bg-[#FAF8F5] text-[#1A2E26]">
       {/* Left Branding & Visual Side */}
-      <div className="relative w-full lg:w-[48%] xl:w-[45%] min-h-[420px] lg:min-h-screen bg-[#072F24] overflow-hidden flex flex-col justify-between p-6 sm:p-10 lg:p-12">
+      <div className="relative w-full lg:w-[48%] xl:w-[45%] min-h-[280px] sm:min-h-[380px] lg:min-h-screen bg-[#072F24] overflow-hidden flex flex-col justify-between p-6 sm:p-10 lg:p-12">
         {/* Background Artwork */}
         <div className="absolute inset-0 z-0">
           <img

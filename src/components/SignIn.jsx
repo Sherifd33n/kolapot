@@ -27,7 +27,7 @@ export default function SignIn({ onNavigate }) {
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row bg-[#FAF8F5] text-[#1A2E26]">
       {/* Left Branding & Visual Side */}
-      <div className="relative w-full lg:w-[48%] xl:w-[45%] min-h-[420px] lg:min-h-screen bg-[#072F24] overflow-hidden flex flex-col justify-between p-6 sm:p-10 lg:p-12">
+      <div className="relative w-full lg:w-[48%] xl:w-[45%] min-h-[280px] sm:min-h-[380px] lg:min-h-screen bg-[#072F24] overflow-hidden flex flex-col justify-between p-6 sm:p-10 lg:p-12">
         {/* Background Artwork */}
         <div className="absolute inset-0 z-0">
           <img
@@ -163,7 +163,7 @@ export default function SignIn({ onNavigate }) {
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                     placeholder="Enter your phone number or email"
-                    className="w-full pl-10 pr-4 py-3 bg-white border border-[#DCE4E0] rounded-xl text-xs sm:text-sm text-[#1B352B] placeholder-[#9CAEA7] focus:outline-none focus:border-[#0B5D4B] focus:ring-1 focus:ring-[#0B5D4B] transition-all shadow-sm"
+                    className="w-full pl-10 pr-4 py-3 bg-white border border-[#DCE4E0] rounded-md text-xs sm:text-sm text-[#1B352B] placeholder-[#9CAEA7] focus:outline-none focus:border-[#0B5D4B] focus:ring-1 focus:ring-[#0B5D4B] transition-all shadow-sm"
                   />
                 </div>
               </div>
@@ -183,7 +183,7 @@ export default function SignIn({ onNavigate }) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
-                    className="w-full pl-10 pr-11 py-3 bg-white border border-[#DCE4E0] rounded-xl text-xs sm:text-sm text-[#1B352B] placeholder-[#9CAEA7] focus:outline-none focus:border-[#0B5D4B] focus:ring-1 focus:ring-[#0B5D4B] transition-all shadow-sm"
+                    className="w-full pl-10 pr-11 py-3 bg-white border border-[#DCE4E0] rounded-md text-xs sm:text-sm text-[#1B352B] placeholder-[#9CAEA7] focus:outline-none focus:border-[#0B5D4B] focus:ring-1 focus:ring-[#0B5D4B] transition-all shadow-sm"
                   />
                   <button
                     type="button"

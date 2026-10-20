@@ -146,7 +146,7 @@ export default function HeroSection({ onOpenCreateModal }) {
           </div>
 
           {/* Staggered features */}
-          <div className="flex flex-col gap-8 items-end">
+          <div className="flex flex-col gap-6 sm:gap-8 items-start sm:items-end">
             {features.map(({ icon: Icon, label, offset }) => (
               <div
                 key={label.join(" ")}

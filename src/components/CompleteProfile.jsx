@@ -15,6 +15,8 @@ import {
   ChevronDown,
 } from "lucide-react";
 import BotanicalFrame from "./BotanicalFrame";
+import { IoMdLock } from "react-icons/io";
+import { PiSealCheckFill } from "react-icons/pi";
 
 export default function CompleteProfile({ onNavigate }) {
   const [formData, setFormData] = useState({
@@ -51,7 +53,9 @@ export default function CompleteProfile({ onNavigate }) {
     alert("Starting live camera scan for facial identity match...");
     setTimeout(() => {
       setFacialVerified(true);
-      alert("Facial verification successful! Verified with live biometric check.");
+      alert(
+        "Facial verification successful! Verified with live biometric check.",
+      );
     }, 1200);
   };
 
@@ -65,10 +69,43 @@ export default function CompleteProfile({ onNavigate }) {
   };
 
   const nigerianStates = [
-    "Abia", "Abuja (FCT)", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue",
-    "Borno", "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo",
-    "Jigawa", "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa",
-    "Niger", "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
+    "Abia",
+    "Abuja (FCT)",
+    "Adamawa",
+    "Akwa Ibom",
+    "Anambra",
+    "Bauchi",
+    "Bayelsa",
+    "Benue",
+    "Borno",
+    "Cross River",
+    "Delta",
+    "Ebonyi",
+    "Edo",
+    "Ekiti",
+    "Enugu",
+    "Gombe",
+    "Imo",
+    "Jigawa",
+    "Kaduna",
+    "Kano",
+    "Katsina",
+    "Kebbi",
+    "Kogi",
+    "Kwara",
+    "Lagos",
+    "Nasarawa",
+    "Niger",
+    "Ogun",
+    "Ondo",
+    "Osun",
+    "Oyo",
+    "Plateau",
+    "Rivers",
+    "Sokoto",
+    "Taraba",
+    "Yobe",
+    "Zamfara",
   ];
 
   return (
@@ -92,18 +129,17 @@ export default function CompleteProfile({ onNavigate }) {
           </button>
         </div>
 
-        {/* Page Title & Subtitle */}
-        <div className="text-center mb-7">
-          <span className="text-[11px] font-['Lusitana',serif] sm:text-[20px] font-bold tracking-[0.02em] uppercase text-[#063127] block mb-1">
-            COMPLETE YOUR PROFILE
-          </span>
-          <p className="text-xs sm:text-sm text-[#7E7F7D] font-normal">
-            Please provide the remaining details to get started with PallyPot.
-          </p>
-        </div>
-
         {/* Profile Card / Success State */}
         <div className="w-full max-w-[700px] bg-white rounded-3xl border border-[#EBE6DD] p-6 sm:p-9 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.05)]">
+          {/* Page Title & Subtitle */}
+          <div className="text-center mb-7">
+            <span className="text-[11px] font-['Lusitana',serif] sm:text-[20px] font-bold tracking-[0.02em] uppercase text-[#063127] block mb-1">
+              COMPLETE YOUR PROFILE
+            </span>
+            <p className="text-xs sm:text-sm text-[#7E7F7D] font-normal">
+              Please provide the remaining details to get started with PallyPot.
+            </p>
+          </div>
           {isCompleted ? (
             <div className="text-center py-8 space-y-5 animate-fadeIn">
               <div className="w-16 h-16 mx-auto rounded-full bg-[#EBF6F1] flex items-center justify-center text-[#0B5D4B] shadow-sm">
@@ -113,7 +149,10 @@ export default function CompleteProfile({ onNavigate }) {
                 Profile Completed!
               </h3>
               <p className="text-xs sm:text-sm text-[#5B6D66] max-w-md mx-auto">
-                Welcome, <strong className="text-[#063127]">{formData.fullName}</strong>. Your identity has been verified and your PallyPot account is fully activated.
+                Welcome,{" "}
+                <strong className="text-[#063127]">{formData.fullName}</strong>.
+                Your identity has been verified and your PallyPot account is
+                fully activated.
               </p>
               <div className="pt-3">
                 <button
@@ -144,23 +183,23 @@ export default function CompleteProfile({ onNavigate }) {
                 </div>
 
                 {/* Full name (Horizontal row) */}
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 sm:w-[80%] w-full">
                   <label className="text-xs sm:text-sm font-semibold text-[#000000] w-28 sm:w-32 shrink-0">
                     Full name
                   </label>
-                  <div className="relative flex-1 flex items-center">
+                  <div className="relative flex-1 flex items-center ">
                     <input
                       type="text"
                       readOnly
                       value={formData.fullName}
                       className="w-full pl-3.5 pr-10 py-3 bg-[#EAECEF] border border-[#D5D8DC] rounded-[5px] text-xs sm:text-sm text-[#505D56] font-medium cursor-not-allowed select-none"
                     />
-                    <Lock className="w-4 h-4 text-[#7A8A82] absolute right-3 pointer-events-none" />
+                    <IoMdLock className="w-6 h-6 text-[#7A8A82] absolute right-3 pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Phone number (Horizontal row + Verified badge) */}
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4  sm:w-[99%] w-full">
                   <label className="text-xs sm:text-sm font-semibold text-[#000000] w-28 sm:w-32 shrink-0">
                     Phone number
                   </label>
@@ -172,20 +211,18 @@ export default function CompleteProfile({ onNavigate }) {
                         value={formData.phone}
                         className="w-full pl-3.5 pr-10 py-3 bg-[#EAECEF] border border-[#D5D8DC] rounded-[5px] text-xs sm:text-sm text-[#505D56] font-medium cursor-not-allowed select-none"
                       />
-                      <Lock className="w-4 h-4 text-[#7A8A82] absolute right-3 pointer-events-none" />
+                      <IoMdLock className="w-6 h-6 text-[#7A8A82] absolute right-3 pointer-events-none" />
                     </div>
                     {/* Verified Badge */}
-                    <div className="bg-[#E8F8F0] text-[#0B8A55] border border-[#C2E8D5] font-semibold text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0 shadow-xs">
-                      <div className="w-4 h-4 rounded-full bg-[#0B8A55] text-white flex items-center justify-center text-[10px] font-bold">
-                        ✓
-                      </div>
+                    <div className="bg-[#E8F8F0] text-[#0B5D4B] border border-[#C2E8D5] font-semibold text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0 shadow-xs">
+                     <PiSealCheckFill size={20} color="#0B5D4B"/>
                       <span>Verified</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Email address (Horizontal row) */}
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4  sm:w-[80%] w-full">
                   <label className="text-xs sm:text-sm font-semibold text-[#000000] w-28 sm:w-32 shrink-0">
                     Email address
                   </label>
@@ -196,12 +233,12 @@ export default function CompleteProfile({ onNavigate }) {
                       value={formData.email}
                       className="w-full pl-3.5 pr-10 py-3 bg-[#EAECEF] border border-[#D5D8DC] rounded-[5px] text-xs sm:text-sm text-[#505D56] font-medium cursor-not-allowed select-none"
                     />
-                    <Lock className="w-4 h-4 text-[#7A8A82] absolute right-3 pointer-events-none" />
+                    <IoMdLock className="w-6 h-6 text-[#7A8A82] absolute right-3 pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Date of birth (Horizontal row) */}
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4  sm:w-[80%] w-full">
                   <label className="text-xs sm:text-sm font-semibold text-[#000000] w-28 sm:w-32 shrink-0">
                     Date of birth
                   </label>
@@ -214,7 +251,7 @@ export default function CompleteProfile({ onNavigate }) {
                       placeholder="DD / MM / YYYY"
                       className="w-full pl-3.5 pr-10 py-3 rounded-[5px] bg-white border border-[#D5D8DC] text-xs sm:text-sm text-[#1B352B] placeholder-[#9CAEA7] focus:outline-none focus:border-[#0B5D4B] focus:ring-1 focus:ring-[#0B5D4B]"
                     />
-                    <Calendar className="w-4 h-4 text-[#7A8A82] absolute right-3 pointer-events-none" />
+                    <Calendar className="w-6 h-6 text-[#7A8A82] absolute right-3 pointer-events-none" />
                   </div>
                 </div>
 
@@ -346,7 +383,9 @@ export default function CompleteProfile({ onNavigate }) {
 
                       <button
                         type="button"
-                        onClick={() => alert("Opening camera device interface...")}
+                        onClick={() =>
+                          alert("Opening camera device interface...")
+                        }
                         className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-3 bg-white border border-[#064335] text-[#064335] hover:bg-[#EBF3F0] rounded-[5px] text-xs sm:text-sm font-semibold transition-colors shadow-xs"
                       >
                         <Camera className="w-4 h-4" />
@@ -373,7 +412,8 @@ export default function CompleteProfile({ onNavigate }) {
                       Identity Verification (KYC)
                     </h3>
                     <p className="text-xs sm:text-sm text-[#7E7F7D]">
-                      We use this to verify your identity and keep your account secure.
+                      We use this to verify your identity and keep your account
+                      secure.
                     </p>
                   </div>
                 </div>
@@ -424,7 +464,7 @@ export default function CompleteProfile({ onNavigate }) {
                   <button
                     type="button"
                     onClick={handleFacialScan}
-                    className={`flex-1 p-3 rounded-xl border flex items-center justify-between text-left transition-all ${
+                    className={`flex-1 p-3 rounded-md border flex items-center justify-between text-left transition-all ${
                       facialVerified
                         ? "border-[#2E7D32] bg-[#F1F8F4]"
                         : "border-[#DCE4E0] bg-white hover:border-[#0B5D4B]"
@@ -474,7 +514,7 @@ export default function CompleteProfile({ onNavigate }) {
 
                 {/* Security Protection Footer */}
                 <div className="flex items-center justify-center gap-1.5 text-xs text-[#898D86] mt-3.5">
-                  <Lock className="w-3.5 h-3.5 text-[#064335]" />
+                  <IoMdLock className="w-6 h-6 text-[#064335]" />
                   <span>Your information is securely protected.</span>
                 </div>
               </div>

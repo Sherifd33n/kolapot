@@ -111,7 +111,7 @@ export default function VerifyAccount({
           {/* Code Input Form */}
           <form onSubmit={handleVerify} className="mt-8 space-y-6">
             {/* 6 Digit Inputs */}
-            <div className="flex justify-center items-center gap-1.5 sm:gap-2.5 md:gap-3.5">
+            <div className="flex justify-center items-center gap-1 sm:gap-2.5 md:gap-3.5">
               {otp.map((digit, index) => (
                 <input
                   key={index}
@@ -123,7 +123,7 @@ export default function VerifyAccount({
                   onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   placeholder="—"
-                  className="w-10 h-11 sm:w-12 sm:h-14 md:w-13 md:h-16 rounded-lg sm:rounded-xl border border-[#DCE4E0] bg-white text-center text-lg sm:text-xl md:text-2xl font-bold text-[#063127] placeholder-[#C2CEC8] focus:outline-none focus:border-[#0B5D4B] focus:ring-2 focus:ring-[#0B5D4B]/20 transition-all shadow-xs"
+                  className="w-9 h-11 xs:w-10 xs:h-12 sm:w-12 sm:h-14 md:w-13 md:h-16 rounded-lg sm:rounded-xl border border-[#DCE4E0] bg-white text-center text-base sm:text-xl md:text-2xl font-bold text-[#063127] placeholder-[#C2CEC8] focus:outline-none focus:border-[#0B5D4B] focus:ring-2 focus:ring-[#0B5D4B]/20 transition-all shadow-xs"
                 />
               ))}
             </div>
