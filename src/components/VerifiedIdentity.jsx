@@ -54,7 +54,7 @@ export default function VerifiedIdentity({ onNavigate }) {
             </h1>
             <p className="text-xs sm:text-sm text-[#7E7F7D] font-normal leading-relaxed mt-2.5">
               Your profile and identity details have been confirmed.
-              <br />
+              <br className=""/>
               You may now proceed to your PallyPot dashboard.
             </p>
           </div>

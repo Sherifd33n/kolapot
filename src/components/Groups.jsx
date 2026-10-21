@@ -34,6 +34,7 @@ import { GoCheckCircleFill } from "react-icons/go";
 import OpenGroupDetailView from "./groups/OpenGroupDetailView";
 import OngoingGroupDetailView from "./groups/OngoingGroupDetailView";
 import JoinWithInviteView from "./groups/JoinWithInviteView";
+import GroupCard from "./groups/GroupCard";
 
 export default function Groups({
   onNavigate,
@@ -450,7 +451,7 @@ export default function Groups({
       {/* Header Row */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl sm:text-3xl font-['Inria Serif',serif] font-normal text-[#063127]">
+          <h2 className="text-2xl sm:text-3xl font-['Inria_Serif',serif] font-normal text-[#063127]">
             My Savings Groups
           </h2>
           <p className="text-sm sm:text-base text-[#7E7F7D] mt-0.5 font-normal">
@@ -470,10 +471,10 @@ export default function Groups({
       </div>
 
       {/* Tabs */}
-      <div className="flex bg-[#F0EDE6] rounded-md max-w-md w-full p-1 gap-1">
+      <div className="flex bg-[#F0EDE6] rounded-md max-w-md w-full gap-1">
         <button
           onClick={() => setActiveGroupTab("my-groups")}
-          className={`flex-1 py-3.5 px-4 rounded-md text-sm font-semibold transition-all duration-200 cursor-pointer ${
+          className={`flex-1 py-4 px-4 rounded-md rounded-br-none text-sm font-semibold transition-all duration-200 cursor-pointer ${
             activeGroupTab === "my-groups"
               ? "bg-[#084A3B] text-white shadow-md scale-[1.01]"
               : "text-[#7E7F7D] hover:text-[#1A2E26] hover:bg-[#E5E0D6]/40"
@@ -483,7 +484,7 @@ export default function Groups({
         </button>
         <button
           onClick={() => setActiveGroupTab("discover")}
-          className={`flex-1 py-3.5 px-4 rounded-md text-sm font-semibold transition-all duration-200 cursor-pointer ${
+          className={`flex-1 py-4 px-4 rounded-md rounded-bl-none text-sm font-semibold transition-all duration-200 cursor-pointer ${
             activeGroupTab === "discover"
               ? "bg-[#084A3B] text-white shadow-md scale-[1.01]"
               : "text-[#7E7F7D] hover:text-[#1A2E26] hover:bg-[#E5E0D6]/40"
@@ -496,7 +497,7 @@ export default function Groups({
       {/* Search & Filters */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9A9D97]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#0B5D4B]" />
           <input
             type="text"
             placeholder="Search groups by name..."
@@ -527,134 +528,11 @@ export default function Groups({
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredGroups.map((group) => (
-              <div
+              <GroupCard
                 key={group.id}
-                className="bg-white rounded-xl p-5 shadow-xl space-y-4 hover:shadow-2xl transition-shadow"
-              >
-                {/* Group Header */}
-                <div className="space-y-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`w-14 h-14 rounded-full ${group.initialBg} font-bold text-2xl flex items-center justify-center shrink-0`}
-                      >
-                        {group.initial}
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <h4 className="text-base font-bold text-[#075140]">
-                            {group.name}
-                          </h4>
-                          <span
-                            className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${group.badgeStyle}`}
-                          >
-                            {group.badge}
-                          </span>
-                        </div>
-                        <p className="text-[12px] text-[#7A7D78] mt-0.5">
-                          Group Admin: {group.admin}
-                        </p>{" "}
-                        <div className="flex items-center gap-2 mt-1">
-                          <div className="flex -space-x-2">
-                            {[...Array(4)].map((_, i) => (
-                              <div
-                                key={i}
-                                className="w-6 h-6 rounded-full bg-[#E5E0D6] border-2 border-white overflow-hidden"
-                              >
-                                <img
-                                  src={`https://api.dicebear.com/7.x/notionists/svg?seed=${group.name}${i}`}
-                                  alt=""
-                                  className="w-full h-full object-cover"
-                                />
-                              </div>
-                            ))}
-                          </div>
-                          <span className="text-[11px] text-[#7E7F7D] font-medium">
-                            {group.members} members
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Contribution Info */}
-                <div className="grid grid-cols-2 gap-3 pt-1">
-                  <div>
-                    <span className="text-2xl font-bold text-[#0B5D4B] block">
-                      {group.contribution}
-                    </span>
-                    <span className="text-[11px] text-[#7E7F7D] block">
-                      {group.frequency}
-                    </span>
-                  </div>
-                  <div className="text-left">
-                    <span className="text-xs font-semibold text-[#7E7F7D] block">
-                      Total commitment
-                    </span>
-                    <span className="text-sm font-bold text-[#000000] block">
-                      {group.totalCommitment}
-                    </span>
-                    <span className="text-[10px] text-[#7E7F7D] block">
-                      {group.totalBreakdown}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Status & Date Row */}
-                <div className="grid grid-cols-2 gap-3 pt-1 border-t border-[#F0EDE6]">
-                  <div>
-                    <span className="text-[11px] text-[#7E7F7D] block font-medium">
-                      Status
-                    </span>
-                    <span className="text-sm font-bold text-[#000000] block">
-                      {group.status}
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[11px] text-[#7E7F7D] block font-medium">
-                      Start Date
-                    </span>
-                    <span className="text-sm font-bold text-[#000000] block">
-                      {group.startDate}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Cycle & Next Contribution */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="flex items-center gap-1.5">
-                    <IoRepeat className="w-7 h-7 text-[#0B5D4B]" />
-                    <div>
-                      <span className="text-[11px] text-[#7E7F7D] block font-medium">
-                        Cycle
-                      </span>
-                      <span className="text-xs font-bold text-[#000000]">
-                        {group.cycle}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1.5 justify-end">
-                    <Calendar className="w-6 h-6 text-[#0B5D4B]" />
-                    <div className="">
-                      <span className="text-[11px] text-[#7E7F7D] block font-medium">
-                        Next contribution
-                      </span>
-                      <span className="text-xs font-bold text-[#000000]">
-                        {group.nextContribution}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* View Group Button */}
-                <button
-                  onClick={() => handleViewGroup(group)}
-                  className="w-full bg-[#064335] hover:bg-[#0B5D4B] text-white text-sm font-semibold py-2.5 rounded-md transition-colors flex items-center justify-center gap-2"
-                >
-                  View Group →
-                </button>
-              </div>
+                group={group}
+                onView={handleViewGroup}
+              />
             ))}
           </div>
         )
@@ -667,108 +545,11 @@ export default function Groups({
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredDiscoverGroups.map((group) => (
-            <div
+            <GroupCard
               key={group.id}
-              className="bg-white rounded-xl p-5 shadow-xl space-y-4 hover:shadow-2xl transition-shadow"
-            >
-              {/* Group Header */}
-              <div className="space-y-3">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-14 h-14 rounded-full ${group.initialBg} font-bold text-2xl flex items-center justify-center shrink-0`}
-                    >
-                      {group.initial}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h4 className="text-base font-bold text-[#075140]">
-                          {group.name}
-                        </h4>
-                        <span
-                          className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${group.badgeStyle}`}
-                        >
-                          {group.badge}
-                        </span>
-                      </div>
-                      <p className="text-[12px] text-[#7A7D78] mt-0.5">
-                        Group Admin: {group.admin}
-                      </p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <div className="flex -space-x-2">
-                          {[...Array(4)].map((_, i) => (
-                            <div
-                              key={i}
-                              className="w-6 h-6 rounded-full bg-[#E5E0D6] border-2 border-white overflow-hidden"
-                            >
-                              <img
-                                src={`https://api.dicebear.com/7.x/notionists/svg?seed=discover${group.id}${i}`}
-                                alt=""
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        <span className="text-[11px] text-[#7E7F7D] font-medium">
-                          {group.displayMembers || group.members} members
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contribution Info */}
-              <div className="grid grid-cols-2 gap-3 pt-1">
-                <div>
-                  <span className="text-2xl font-bold text-[#0B5D4B] block">
-                    {group.contribution}
-                  </span>
-                  <span className="text-[11px] text-[#7E7F7D] block">
-                    {group.frequency}
-                  </span>
-                </div>
-                <div className="text-left">
-                  <span className="text-xs font-semibold text-[#7E7F7D] block">
-                    Total commitment
-                  </span>
-                  <span className="text-sm font-bold text-[#000000] block">
-                    {group.totalCommitment}
-                  </span>
-                  <span className="text-[10px] text-[#7E7F7D] block">
-                    {group.totalBreakdown}
-                  </span>
-                </div>
-              </div>
-
-              {/* Status & Slots Left */}
-              <div className="grid grid-cols-2 gap-3 pt-1 border-t border-[#F0EDE6]">
-                <div>
-                  <span className="text-[11px] text-[#7E7F7D] block font-medium">
-                    Status
-                  </span>
-                  <span className="text-sm font-bold text-[#000000] block">
-                    {group.status}
-                  </span>
-                </div>
-                <div className="text-right">
-                  <span className="text-[11px] text-[#7E7F7D] block font-medium">
-                    Slots left
-                  </span>
-                  <span className="text-sm font-bold text-[#000000] block">
-                    {group.cardSlotsLeft || group.slotsLeft}
-                  </span>
-                </div>
-              </div>
-
-              {/* View Details Button */}
-              <button
-                onClick={() => handleViewGroup(group)}
-                className="w-full bg-[#064335] hover:bg-[#0B5D4B] text-white text-sm font-semibold py-2.5 rounded-md transition-colors flex items-center justify-center gap-2"
-              >
-                View Details →
-              </button>
-            </div>
+              group={group}
+              onView={handleViewGroup}
+            />
           ))}
         </div>
       )}

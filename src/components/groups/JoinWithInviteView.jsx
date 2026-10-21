@@ -134,7 +134,7 @@ export default function JoinWithInviteView({
       {/* STEP 1: ENTER LINK CARD */}
       {inviteStep === 1 && (
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 shadow-xs border border-[#F0EDE6] max-w-2xl mx-auto text-center space-y-6">
+          <div className="bg-white rounded-md p-5 sm:p-8 md:p-12 shadow-xs border border-[#F0EDE6] max-w-2xl mx-auto text-center space-y-6">
             {/* Mint Icon Badge */}
             <div className="w-20 h-20 rounded-full bg-[#30BB9C21] flex items-center justify-center mx-auto text-[#0D5C46] transition-transform hover:scale-105">
               <FiLink className="w-8 h-8 text-[#064335] stroke-[2.2]" />
@@ -145,7 +145,7 @@ export default function JoinWithInviteView({
               <h3 className="text-xl sm:text-2xl font-bold text-[#000000]">
                 Enter Group Invite Link
               </h3>
-              <p className="text-xs sm:text-sm text-[#8798A6]">
+              <p className="text-sm sm:text-base text-[#8798A6]">
                 Paste the invite link you received from the group admin.
               </p>
             </div>
@@ -179,7 +179,7 @@ export default function JoinWithInviteView({
           </div>
 
           {/* Info Notice Banner */}
-          <div className="max-w-2xl mx-auto bg-[#E5F3EB] border border-[#D2E7DC] rounded-xl p-4 flex items-center gap-3.5">
+          <div className="max-w-2xl mx-auto bg-[#30BB9C21] rounded-md p-4 flex items-center gap-3.5">
             <ShieldCheck className="w-7 h-7 text-[#0D5C46] shrink-0" />
             <p className="text-xs sm:text-sm font-medium text-[#0D5C46] leading-normal">
               This link is private and can only be used to join this group.
@@ -192,9 +192,9 @@ export default function JoinWithInviteView({
       {inviteStep === 2 && (
         <div className="space-y-6 max-w-4xl mx-auto">
           {/* Group Overview Banner */}
-          <div className="bg-white rounded-xl p-2 shadow-xs border border-[#F3EFEA] flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          <div className="bg-white rounded-md p-2 shadow-xs border border-[#F3EFEA] flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div className="flex items-start gap-4">
-              <div className="w-24 h-24 sm:w-22 sm:h-22 rounded-xl bg-[#EFE3DD] text-[#5D130B] font-bold text-2xl sm:text-3xl flex items-center justify-center shrink-0 tracking-wider select-none">
+              <div className="w-24 h-24 sm:w-22 sm:h-22 rounded-md bg-[#EFE3DD] text-[#5D130B] font-bold text-2xl sm:text-3xl flex items-center justify-center shrink-0 tracking-wider select-none">
                 UAC
               </div>
               <div>
@@ -368,7 +368,7 @@ export default function JoinWithInviteView({
               <button
                 type="button"
                 onClick={() => setInviteStep(3)}
-                className="w-full max-w-xs py-3.5 bg-[#0B5D4B] hover:bg-[#094534] text-white font-medium rounded-lg text-base transition-colors cursor-pointer active:scale-[0.99] shadow-xs text-center"
+                className="w-full max-w-lg py-3.5 bg-[#0B5D4B] hover:bg-[#094534] text-white font-medium rounded-md text-base transition-colors cursor-pointer active:scale-[0.99] shadow-xs text-center"
               >
                 Continue
               </button>
@@ -381,9 +381,9 @@ export default function JoinWithInviteView({
       {inviteStep === 3 && (
         <div className="space-y-6 max-w-4xl mx-auto">
           {/* Group Overview Banner */}
-          <div className="bg-white rounded-xl p-2 shadow-xs border border-[#F3EFEA] flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          <div className="bg-white rounded-md p-2 shadow-xs border border-[#F3EFEA] flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div className="flex items-start gap-4">
-              <div className="w-24 h-24 sm:w-22 sm:h-22 rounded-xl bg-[#EFE3DD] text-[#5D130B] font-bold text-2xl sm:text-3xl flex items-center justify-center shrink-0 tracking-wider select-none">
+              <div className="w-24 h-24 sm:w-22 sm:h-22 rounded-md bg-[#EFE3DD] text-[#5D130B] font-bold text-2xl sm:text-3xl flex items-center justify-center shrink-0 tracking-wider select-none">
                 UAC
               </div>
               <div>
@@ -479,7 +479,7 @@ export default function JoinWithInviteView({
           </div>
 
           {/* Your Selected Payout Order Card */}
-          <div className="bg-[#67EFD114] rounded-xl p-5 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
+          <div className="bg-[#67EFD114] rounded-md p-5 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
             <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-[#67EFD124] flex items-center justify-center shrink-0">
               <Calendar className="w-7 h-7 sm:w-10 sm:h-10 text-[#0B5D4B] stroke-[1.8]" />
             </div>
@@ -500,7 +500,7 @@ export default function JoinWithInviteView({
           </div>
 
           {/* Info / Notice Banner */}
-          <div className="bg-[#FFFF0021] rounded-xl p-4 sm:p-5 flex items-center gap-4">
+          <div className="bg-[#FFFF0021] rounded-md p-4 sm:p-5 flex items-center gap-4">
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#8A6A1E] flex items-center justify-center shrink-0 text-[#432A06] font-serif font-bold text-base leading-none">
               i
             </div>
@@ -514,7 +514,7 @@ export default function JoinWithInviteView({
             <button
               type="button"
               onClick={onComplete}
-              className="w-full max-w-lg py-4 bg-[#0B5D4B] hover:bg-[#094534] text-white font-medium rounded-lg text-base transition-colors cursor-pointer active:scale-[0.99] shadow-xs text-center"
+              className="w-full max-w-lg py-4 bg-[#0B5D4B] hover:bg-[#094534] text-white font-medium rounded-md text-base transition-colors cursor-pointer active:scale-[0.99] shadow-xs text-center"
             >
               Request to Join
             </button>

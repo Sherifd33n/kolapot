@@ -141,7 +141,7 @@ export default function BankTransferView({
           <button
             type="button"
             onClick={onComplete}
-            className="w-full py-4 bg-[#0B5D4B] hover:bg-[#0B4032] text-white font-semibold rounded-md text-sm sm:text-base transition-colors cursor-pointer shadow-xs active:scale-[0.99] text-center"
+            className="w-[90%] flex justify-center mx-auto py-4 bg-[#0B5D4B] hover:bg-[#0B4032] text-white font-semibold rounded-md text-sm sm:text-base transition-colors cursor-pointer shadow-xs active:scale-[0.99] text-center"
           >
             I  Have Made the Transfer
           </button>

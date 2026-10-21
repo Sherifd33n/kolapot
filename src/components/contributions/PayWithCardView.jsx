@@ -151,7 +151,7 @@ export default function PayWithCardView({
             <button
               type="submit"
               disabled={isProcessingPayment}
-              className="w-full py-4 bg-[#0B5D4B] hover:bg-[#074738] disabled:opacity-75 text-white font-bold rounded-md text-sm sm:text-base transition-colors cursor-pointer shadow-xs active:scale-[0.99] text-center flex items-center justify-center gap-2"
+              className="w-[90%]  mx-auto py-4 bg-[#0B5D4B] hover:bg-[#074738] disabled:opacity-75 text-white font-bold rounded-md text-sm sm:text-base transition-colors cursor-pointer shadow-xs active:scale-[0.99] text-center flex items-center justify-center gap-2"
             >
               {isProcessingPayment ? (
                 <>

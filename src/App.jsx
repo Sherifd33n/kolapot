@@ -19,7 +19,16 @@ export default function App() {
     if (hash.includes("signup") || hash.includes("register")) return "signup";
     if (hash.includes("verify") && !hash.includes("verified")) return "verify";
     if (hash.includes("verified")) return "verified";
-    if (hash.includes("dashboard") || hash.includes("group")) return "dashboard";
+    if (
+      hash.includes("dashboard") ||
+      hash.includes("group") ||
+      hash.includes("payout") ||
+      hash.includes("wallet") ||
+      hash.includes("contribution") ||
+      hash.includes("notification") ||
+      hash.includes("help")
+    )
+      return "dashboard";
     if (hash.includes("profile") || hash.includes("complete")) return "complete-profile";
     return "home";
   };
@@ -42,7 +51,15 @@ export default function App() {
         setCurrentPage("verify");
       } else if (hash.includes("verified")) {
         setCurrentPage("verified");
-      } else if (hash.includes("dashboard") || hash.includes("group")) {
+      } else if (
+        hash.includes("dashboard") ||
+        hash.includes("group") ||
+        hash.includes("payout") ||
+        hash.includes("wallet") ||
+        hash.includes("contribution") ||
+        hash.includes("notification") ||
+        hash.includes("help")
+      ) {
         setCurrentPage("dashboard");
       } else if (hash.includes("profile") || hash.includes("complete")) {
         setCurrentPage("complete-profile");

@@ -121,7 +121,7 @@ export default function MakeContributionView({
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {/* Wallet Balance */}
           <label
-            className={`flex flex-col gap-3 p-4 rounded-md border-2 cursor-pointer transition-all ${
+            className={`flex flex-col gap-3 p-2 rounded-md border-2 cursor-pointer transition-all ${
               paymentMethod === "wallet"
                 ? "border-[#0B5D4B] bg-[#F0FAF5]"
                 : "border-[#E5E0D6] bg-white hover:border-[#0B5D4B]/40"
@@ -136,7 +136,7 @@ export default function MakeContributionView({
                 onChange={() => setPaymentMethod("wallet")}
                 className="w-4 h-4 accent-[#0B5D4B] cursor-pointer"
               />
-              <div className="flex items-center justify-center shrink-0 text-[#064335] bg-white">
+              <div className="flex items-center justify-center shrink-0 text-[#064335] bg-white  mt-3">
                 <Wallet className="w-7 h-7" />
               </div>
             </div>
@@ -155,7 +155,7 @@ export default function MakeContributionView({
 
           {/* Bank Transfer */}
           <label
-            className={`flex flex-col gap-3 p-4 rounded-md border-2 cursor-pointer transition-all ${
+            className={`flex flex-col gap-3 p-2 rounded-md border-2 cursor-pointer transition-all ${
               paymentMethod === "bank"
                 ? "border-[#0B5D4B] bg-[#F0FAF5]"
                 : "border-[#E5E0D6] bg-white hover:border-[#0B5D4B]/40"
@@ -170,7 +170,7 @@ export default function MakeContributionView({
                 onChange={() => setPaymentMethod("bank")}
                 className="w-4 h-4 accent-[#0B5D4B] cursor-pointer"
               />
-              <div className="flex items-center justify-center shrink-0 text-[#064335] bg-white">
+              <div className="flex items-center justify-center shrink-0 text-[#064335] bg-white mt-3">
                 <Landmark className="w-7 h-7" />
               </div>
             </div>
@@ -186,7 +186,7 @@ export default function MakeContributionView({
 
           {/* Card Payment */}
           <label
-            className={`flex flex-col gap-3 p-4 rounded-md border-2 cursor-pointer transition-all ${
+            className={`flex flex-col gap-3 p-2 rounded-md border-2 cursor-pointer transition-all ${
               paymentMethod === "card"
                 ? "border-[#0B5D4B] bg-[#F0FAF5]"
                 : "border-[#E5E0D6] bg-white hover:border-[#0B5D4B]/40"
@@ -201,7 +201,7 @@ export default function MakeContributionView({
                 onChange={() => setPaymentMethod("card")}
                 className="w-4 h-4 accent-[#0B5D4B] cursor-pointer"
               />
-              <div className="flex items-center justify-center shrink-0 text-[#064335] bg-white">
+              <div className="flex items-center justify-center shrink-0 text-[#064335] bg-white mt-3">
                 <CreditCard className="w-7 h-7" />
               </div>
             </div>
@@ -251,7 +251,7 @@ export default function MakeContributionView({
         <button
           type="button"
           onClick={onSubmit}
-          className="w-full py-4 bg-[#0B5D4B] hover:bg-[#094534] text-white font-semibold rounded-lg text-base transition-colors cursor-pointer active:scale-[0.99] shadow-xs text-center"
+          className="w-[90%] mx-auto justify-center flex py-4 bg-[#0B5D4B] hover:bg-[#094534] text-white font-semibold rounded-lg text-base transition-colors cursor-pointer active:scale-[0.99] shadow-xs text-center"
         >
           Make Contribution
         </button>

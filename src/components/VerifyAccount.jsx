@@ -139,7 +139,7 @@ export default function VerifyAccount({
             <button
               type="submit"
               disabled={isVerifying}
-              className="w-full py-3.5 px-6 bg-[#064335] hover:bg-[#052A21] text-white font-semibold       rounded-[10px] shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 text-sm group cursor-pointer disabled:opacity-75"
+              className="w-full md:w-[80%] mx-auto py-3.5 px-6 bg-[#064335] hover:bg-[#052A21] text-white font-semibold       rounded-[10px] shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 text-sm group cursor-pointer disabled:opacity-75"
             >
               <span>{isVerifying ? "Verifying..." : "Verify account"}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

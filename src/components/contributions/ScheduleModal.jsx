@@ -1,12 +1,19 @@
 import React from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 
 export default function ScheduleModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-[#F0EDE6] space-y-5">
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-[#F0EDE6] space-y-5 my-auto animate-tab-content"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between pb-3 border-b border-[#F0EDE6]">
           <div>
             <h3 className="font-bold text-lg text-[#111827]">
@@ -82,6 +89,7 @@ export default function ScheduleModal({ isOpen, onClose }) {
           Close
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

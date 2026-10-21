@@ -32,10 +32,10 @@ export default function OpenGroupDetailView({
         </button>
 
         {/* Group Header Card */}
-        <div className="bg-white rounded-xl p-2 shadow-xs border border-[#F3EFEA]">
+        <div className="bg-white rounded-md p-2 shadow-xs border border-[#F3EFEA]">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div className="flex items-start gap-4 sm:gap-5">
-              <div className="w-24 h-24 sm:w-22 sm:h-22 rounded-xl bg-[#EFE3DD] text-[#5D130B] font-bold text-2xl sm:text-3xl flex items-center justify-center shrink-0 tracking-wider select-none">
+              <div className="w-24 h-24 sm:w-22 sm:h-22 rounded-md bg-[#EFE3DD] text-[#5D130B] font-bold text-2xl sm:text-3xl flex items-center justify-center shrink-0 tracking-wider select-none">
                 {g.initial || "UAC"}
               </div>
               <div>
@@ -81,8 +81,8 @@ export default function OpenGroupDetailView({
         {/* 4 Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Card 1: Total members */}
-          <div className="bg-white rounded-xl p-3 shadow-xs border border-[#F3EFEA] flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#E3F6EC] text-[#0B5D4B] flex items-center justify-center shrink-0">
+          <div className="bg-white rounded-md p-3 shadow-xs border border-[#F3EFEA] flex items-center gap-4">
+            <div className="w-12 h-12 rounded-md bg-[#E3F6EC] text-[#0B5D4B] flex items-center justify-center shrink-0">
               <Users className="w-6 h-6" />
             </div>
             <div>
@@ -96,8 +96,8 @@ export default function OpenGroupDetailView({
           </div>
 
           {/* Card 2: Contribution frequency */}
-          <div className="bg-white rounded-xl p-3 shadow-xs border border-[#F3EFEA] flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#E3F6EC] text-[#0B5D4B] flex items-center justify-center shrink-0">
+          <div className="bg-white rounded-md p-3 shadow-xs border border-[#F3EFEA] flex items-center gap-4">
+            <div className="w-12 h-12 rounded-md bg-[#E3F6EC] text-[#0B5D4B] flex items-center justify-center shrink-0">
               <Wallet className="w-6 h-6" />
             </div>
             <div>
@@ -111,8 +111,8 @@ export default function OpenGroupDetailView({
           </div>
 
           {/* Card 3: Slots left */}
-          <div className="bg-white rounded-xl p-3 shadow-xs border border-[#F3EFEA] flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#E3F6EC] text-[#0B5D4B] flex items-center justify-center shrink-0">
+          <div className="bg-white rounded-md p-3 shadow-xs border border-[#F3EFEA] flex items-center gap-4">
+            <div className="w-12 h-12 rounded-md bg-[#E3F6EC] text-[#0B5D4B] flex items-center justify-center shrink-0">
               <UserPlus className="w-6 h-6" />
             </div>
             <div>
@@ -126,8 +126,8 @@ export default function OpenGroupDetailView({
           </div>
 
           {/* Card 4: Total amount */}
-          <div className="bg-white rounded-xl p-3 shadow-xs border border-[#F3EFEA] flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#E3F6EC] text-[#0B5D4B] flex items-center justify-center shrink-0">
+          <div className="bg-white rounded-md p-3 shadow-xs border border-[#F3EFEA] flex items-center gap-4">
+            <div className="w-12 h-12 rounded-md bg-[#E3F6EC] text-[#0B5D4B] flex items-center justify-center shrink-0">
               <Wallet className="w-6 h-6" />
             </div>
             <div>
@@ -142,7 +142,7 @@ export default function OpenGroupDetailView({
         </div>
 
         {/* Available Payout Order Card */}
-        <div className="bg-white rounded-2xl p-6 shadow-xs border border-[#F3EFEA] space-y-4">
+        <div className="bg-white rounded-md p-6 shadow-xs border border-[#F3EFEA] space-y-4">
           <h3 className="text-base sm:text-lg font-bold text-[#111827]">
             Available Payout order
           </h3>
@@ -154,7 +154,7 @@ export default function OpenGroupDetailView({
                   <button
                     key={slot}
                     onClick={() => setSelectedPayoutSlot(slot)}
-                    className={`w-12 h-16 rounded-t-3xl rounded-b-3xl border-2 flex flex-col items-center justify-between p-2 cursor-pointer transition-all ${
+                    className={`w-12 h-16 rounded-t-3xl rounded-b-3xl border flex flex-col items-center justify-between p-2 cursor-pointer transition-all ${
                       isSelected
                         ? "border-[#0B5D4B] bg-[#EAF7EE] text-[#0B5D4B] shadow-xs"
                         : "border-[#48B198] bg-white text-[#0B5D4B] hover:bg-[#F2FAF7]"
@@ -188,7 +188,7 @@ export default function OpenGroupDetailView({
         {/* Middle Row: Group members + Group rules */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {/* Group members */}
-          <div className="bg-white rounded-xl p-5 sm:p-6 shadow-xs border border-[#F3EFEA] space-y-4">
+          <div className="bg-white rounded-md p-5 sm:p-6 shadow-xs border border-[#F3EFEA] space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold text-[#000000]">
                 Group members (6)
@@ -263,7 +263,7 @@ export default function OpenGroupDetailView({
           </div>
 
           {/* Group rules */}
-          <div className="bg-white rounded-xl p-5 sm:p-6 shadow-xs border border-[#F3EFEA] space-y-4">
+          <div className="bg-white rounded-md p-5 sm:p-6 shadow-xs border border-[#F3EFEA] space-y-4">
             <h3 className="text-base font-bold text-[#000000]">Group rules</h3>
             <div className="space-y-0">
               {[
@@ -316,7 +316,7 @@ export default function OpenGroupDetailView({
         {/* Bottom Row: Recent activity (8 cols) + Join this group (4 cols) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
           {/* Recent activity */}
-          <div className="lg:col-span-8 bg-white rounded-2xl p-6 shadow-xs border border-[#F3EFEA] space-y-5">
+          <div className="lg:col-span-8 bg-white rounded-md p-6 shadow-xs border border-[#F3EFEA] space-y-5">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold text-[#111827]">
                 Recent activity
@@ -353,8 +353,8 @@ export default function OpenGroupDetailView({
           </div>
 
           {/* Join this group */}
-          <div className="lg:col-span-4 bg-white rounded-2xl p-3 shadow-xs">
-            <div className="bg-[#8FEFAA4F] rounded-2xl p-3 flex flex-col justify-between space-y-4">
+          <div className="lg:col-span-4 bg-white rounded-md p-3 shadow-xs">
+            <div className="bg-[#8FEFAA4F] rounded-md p-3 flex flex-col justify-between space-y-4">
             <div>
               <h3 className="text-lg font-bold text-[#111827]">
                 Join this group
