@@ -5,6 +5,7 @@ import Payouts from "./Payouts";
 import WalletView from "./Wallet";
 import Notifications from "./Notifications";
 import Help from "./Help";
+import Settings from "./Settings";
 import DashboardSidebar from "./dashboard/DashboardSidebar";
 import HomeView from "./dashboard/HomeView";
 import { Users, ChevronDown, Clock, Menu } from "lucide-react";
@@ -28,6 +29,9 @@ export default function Dashboard({ onNavigate, initialTab = "Home" }) {
     }
     if (typeof window !== "undefined" && window.location.hash.toLowerCase().includes("help")) {
       return "Help";
+    }
+    if (typeof window !== "undefined" && window.location.hash.toLowerCase().includes("setting")) {
+      return "Settings";
     }
     return initialTab;
   });
@@ -107,6 +111,8 @@ export default function Dashboard({ onNavigate, initialTab = "Home" }) {
             <Notifications onNavigate={onNavigate} />
           ) : activeTab === "Help" ? (
             <Help onNavigate={onNavigate} />
+          ) : activeTab === "Settings" ? (
+            <Settings onNavigate={onNavigate} />
           ) : activeTab === "Home" ? (
             <HomeView
               setActiveTab={setActiveTab}
