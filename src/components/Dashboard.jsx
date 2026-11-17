@@ -48,7 +48,11 @@ export default function Dashboard({ onNavigate, initialTab = "Home" }) {
   const [hiddenBalances, setHiddenBalances] = useState({});
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#1A2E26] flex">
+    <div
+      className={`min-h-screen ${
+        activeTab === "Groups" ? "bg-white" : "bg-[#FAF8F5]"
+      } text-[#1A2E26] flex`}
+    >
       {/* Mobile Sidebar Backdrop */}
       {sidebarOpen && (
         <div

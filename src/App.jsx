@@ -11,25 +11,30 @@ import VerifyAccount from "./components/VerifyAccount";
 import CompleteProfile from "./components/CompleteProfile";
 import VerifiedIdentity from "./components/VerifiedIdentity";
 import Dashboard from "./components/Dashboard";
+import AdminDashboard from "./components/admin/AdminDashboard";
 
 export default function App() {
   const getInitialPage = () => {
-    const hash = window.location.hash.toLowerCase();
-    if (hash.includes("signin") || hash.includes("login")) return "signin";
-    if (hash.includes("signup") || hash.includes("register")) return "signup";
-    if (hash.includes("verify") && !hash.includes("verified")) return "verify";
-    if (hash.includes("verified")) return "verified";
+    const hash = (typeof window !== "undefined" ? window.location.hash : "").toLowerCase();
+    const pathname = (typeof window !== "undefined" ? window.location.pathname : "").toLowerCase();
+    const full = `${pathname} ${hash}`;
+
+    if (full.includes("signin") || full.includes("login")) return "signin";
+    if (full.includes("signup") || full.includes("register")) return "signup";
+    if (full.includes("verify") && !full.includes("verified")) return "verify";
+    if (full.includes("verified")) return "verified";
+    if (full.includes("admin") || full.includes("create-group")) return "admin";
     if (
-      hash.includes("dashboard") ||
-      hash.includes("group") ||
-      hash.includes("payout") ||
-      hash.includes("wallet") ||
-      hash.includes("contribution") ||
-      hash.includes("notification") ||
-      hash.includes("help")
+      full.includes("dashboard") ||
+      full.includes("group") ||
+      full.includes("payout") ||
+      full.includes("wallet") ||
+      full.includes("contribution") ||
+      full.includes("notification") ||
+      full.includes("help")
     )
       return "dashboard";
-    if (hash.includes("profile") || hash.includes("complete")) return "complete-profile";
+    if (full.includes("profile") || full.includes("complete")) return "complete-profile";
     return "home";
   };
 
@@ -41,35 +46,44 @@ export default function App() {
   });
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.toLowerCase();
-      if (hash.includes("signin") || hash.includes("login")) {
+    const handleUrlChange = () => {
+      const hash = (typeof window !== "undefined" ? window.location.hash : "").toLowerCase();
+      const pathname = (typeof window !== "undefined" ? window.location.pathname : "").toLowerCase();
+      const full = `${pathname} ${hash}`;
+
+      if (full.includes("signin") || full.includes("login")) {
         setCurrentPage("signin");
-      } else if (hash.includes("signup") || hash.includes("register")) {
+      } else if (full.includes("signup") || full.includes("register")) {
         setCurrentPage("signup");
-      } else if (hash.includes("verify") && !hash.includes("verified")) {
+      } else if (full.includes("verify") && !full.includes("verified")) {
         setCurrentPage("verify");
-      } else if (hash.includes("verified")) {
+      } else if (full.includes("verified")) {
         setCurrentPage("verified");
+      } else if (full.includes("admin") || full.includes("create-group")) {
+        setCurrentPage("admin");
       } else if (
-        hash.includes("dashboard") ||
-        hash.includes("group") ||
-        hash.includes("payout") ||
-        hash.includes("wallet") ||
-        hash.includes("contribution") ||
-        hash.includes("notification") ||
-        hash.includes("help")
+        full.includes("dashboard") ||
+        full.includes("group") ||
+        full.includes("payout") ||
+        full.includes("wallet") ||
+        full.includes("contribution") ||
+        full.includes("notification") ||
+        full.includes("help")
       ) {
         setCurrentPage("dashboard");
-      } else if (hash.includes("profile") || hash.includes("complete")) {
+      } else if (full.includes("profile") || full.includes("complete")) {
         setCurrentPage("complete-profile");
       } else {
         setCurrentPage("home");
       }
     };
 
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    window.addEventListener("hashchange", handleUrlChange);
+    window.addEventListener("popstate", handleUrlChange);
+    return () => {
+      window.removeEventListener("hashchange", handleUrlChange);
+      window.removeEventListener("popstate", handleUrlChange);
+    };
   }, []);
 
   const handleNavigate = (page, data = null) => {
@@ -89,6 +103,8 @@ export default function App() {
       window.location.hash = "/verified";
     } else if (page === "dashboard") {
       window.location.hash = "/dashboard";
+    } else if (page === "admin") {
+      window.location.hash = "/admin";
     } else {
       window.location.hash = "";
     }
@@ -103,9 +119,14 @@ export default function App() {
     setModalState({ isOpen: false, mode: "create" });
   };
 
-  // Render Dashboard Page
+  // Render Dashboard Page (Member)
   if (currentPage === "dashboard") {
     return <Dashboard onNavigate={handleNavigate} />;
+  }
+
+  // Render Admin Dashboard (Independent)
+  if (currentPage === "admin") {
+    return <AdminDashboard onNavigate={handleNavigate} />;
   }
 
   // Render Sign In Page
