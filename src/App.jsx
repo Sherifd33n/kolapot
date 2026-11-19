@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import ProcessBar from "./components/ProcessBar";
-import TraditionTrust from "./components/TraditionTrust";
-import FourVoices from "./components/FourVoices";
-import AjoModal from "./components/AjoModal";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
-import VerifyAccount from "./components/VerifyAccount";
-import CompleteProfile from "./components/CompleteProfile";
-import VerifiedIdentity from "./components/VerifiedIdentity";
-import Dashboard from "./components/Dashboard";
+
+// --- Landing Page Components ---
+import Navbar from "./components/landing/Navbar";
+import HeroSection from "./components/landing/HeroSection";
+import ProcessBar from "./components/landing/ProcessBar";
+import TraditionTrust from "./components/landing/TraditionTrust";
+import FourVoices from "./components/landing/FourVoices";
+import AjoModal from "./components/landing/AjoModal";
+
+// --- Authentication & Onboarding Components ---
+import SignIn from "./components/auth/SignIn";
+import SignUp from "./components/auth/SignUp";
+import VerifyAccount from "./components/auth/VerifyAccount";
+import CompleteProfile from "./components/auth/CompleteProfile";
+import VerifiedIdentity from "./components/auth/VerifiedIdentity";
+
+// --- User Portal (Member Experience) ---
+import Dashboard from "./components/user/Dashboard";
+
+// --- Admin Portal (Group Admin & Operations) ---
 import AdminDashboard from "./components/admin/AdminDashboard";
 
 export default function App() {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Notifications from "../Notifications";
-import Help from "../Help";
-import Settings from "../Settings";
+import Notifications from "../user/Notifications";
+import Help from "../user/Help";
+import Settings from "../user/Settings";
 import AdminSidebar from "./AdminSidebar";
 import AdminHomeView from "./AdminHomeView";
 import AdminGroupsView from "./AdminGroupsView";

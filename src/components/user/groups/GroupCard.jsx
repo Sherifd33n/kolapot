@@ -1,6 +1,7 @@
-﻿import React from "react";
+import React from "react";
 import { Calendar } from "lucide-react";
 import { IoRepeat } from "react-icons/io5";
+import { BiRightArrowAlt } from "react-icons/bi";
 
 export default function  GroupCard({ group, onView }) {
   const isDiscover = group.status === "Open";
@@ -95,7 +96,8 @@ export default function  GroupCard({ group, onView }) {
         onClick={() => onView(group)}
         className="w-full bg-[#064335] hover:bg-[#0B5D4B] text-white text-sm font-semibold py-2.5 rounded-md transition-colors flex items-center justify-center gap-2"
       >
-        {isDiscover ? "View Details →" : "View Group →"}
+        <span>{isDiscover ? "View Details" : "View Group"}</span>
+        <BiRightArrowAlt className="w-5 h-5 mt-1" />
       </button>
     </div>
   );

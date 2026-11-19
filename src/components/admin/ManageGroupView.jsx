@@ -275,6 +275,92 @@ export default function ManageGroupView({ group, onBack }) {
     additionalRule: "Late payment won't be tolerated.",
   });
 
+  // Group Health & Performance Cycles State (Dynamic Charts)
+  const [healthCycles, setHealthCycles] = useState([
+    {
+      cycle: 1,
+      label: "Cycle 1",
+      val: 92,
+      expected: 600000,
+      collected: 550000,
+      pending: 50000,
+      overdue: 0,
+      onTime: "11 of 12",
+    },
+    {
+      cycle: 2,
+      label: "Cycle 2",
+      val: 100,
+      expected: 600000,
+      collected: 600000,
+      pending: 0,
+      overdue: 0,
+      onTime: "12 of 12",
+    },
+    {
+      cycle: 3,
+      label: "Cycle 3",
+      val: 92,
+      expected: 600000,
+      collected: 550000,
+      pending: 50000,
+      overdue: 0,
+      onTime: "11 of 12",
+    },
+    {
+      cycle: 4,
+      label: "Cycle 4",
+      val: 100,
+      expected: 600000,
+      collected: 600000,
+      pending: 0,
+      overdue: 0,
+      onTime: "12 of 12",
+    },
+    {
+      cycle: 5,
+      label: "Cycle 5",
+      val: 100,
+      expected: 600000,
+      collected: 600000,
+      pending: 0,
+      overdue: 0,
+      onTime: "12 of 12",
+    },
+    {
+      cycle: 6,
+      label: "Cycle 6",
+      val: 100,
+      expected: 600000,
+      collected: 600000,
+      pending: 0,
+      overdue: 0,
+      onTime: "12 of 12",
+    },
+    {
+      cycle: 7,
+      label: "Cycle 7",
+      val: 92,
+      expected: 600000,
+      collected: 550000,
+      pending: 50000,
+      overdue: 0,
+      onTime: "11 of 12",
+    },
+    {
+      cycle: 8,
+      label: "Cycle 8",
+      val: 100,
+      expected: 600000,
+      collected: 600000,
+      pending: 0,
+      overdue: 0,
+      onTime: "12 of 12",
+    },
+  ]);
+  const [selectedCycleIndex, setSelectedCycleIndex] = useState(7); // Default to current/ongoing cycle (Cycle 8)
+  const [hoveredCycleIndex, setHoveredCycleIndex] = useState(null);
+
   // Disputes State & Mock Data (Images 1 & 2)
   const [selectedDispute, setSelectedDispute] = useState(null);
   const [disputeNote, setDisputeNote] = useState("");
@@ -2387,82 +2473,108 @@ export default function ManageGroupView({ group, onBack }) {
         )}
 
         {/* ============== GROUP HEALTH TAB (IMAGE 1) ============== */}
-        {activeTab === "Group Health" && (
-          <div className="space-y-6">
-            {/* Header */}
-            <div>
-              <h3 className="text-xl font-bold text-[#1A2E26]">
-                Group Health Overview
-              </h3>
-              <p className="text-xs sm:text-sm text-[#7E7F7D] mt-0.5">
-                A quick snapshot of your group's performance and risk level.
-              </p>
-            </div>
+        {activeTab === "Group Health" && (() => {
+          const activeCycle = healthCycles[selectedCycleIndex] || healthCycles[healthCycles.length - 1];
+          const radius = 64;
+          const circumference = 2 * Math.PI * radius;
+          const collectedPercent = activeCycle.expected > 0 
+            ? Math.min(100, Math.round((activeCycle.collected / activeCycle.expected) * 100))
+            : activeCycle.val;
+          const strokeOffset = circumference - (circumference * collectedPercent) / 100;
+          const isHealthy = activeCycle.val >= 90;
+          const isFair = activeCycle.val >= 75 && activeCycle.val < 90;
 
-            {/* 4 Metric Cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {/* Contribution Rate */}
-              <div className="bg-white rounded-[10px] border border-[#F0EBE1] p-2 flex items-center gap-3">
-                <div className="w-12 h-12 rounded-[8px] bg-[#EAF7EE] flex items-center justify-center shrink-0">
-                  <GoDatabase className="w-6 h-6 text-[#16A34A]" />
-                </div>
-                <div>
-                  <p className="text-xs text-[#7E7F7D] font-medium">
-                    Contribution Rate
-                  </p>
-                  <p className="text-lg font-bold text-[#1A2E26]">100%</p>
-                </div>
+          return (
+            <div className="space-y-6">
+              {/* Header */}
+              <div>
+                <h3 className="text-xl font-bold text-[#1A2E26]">
+                  Group Health Overview
+                </h3>
+                <p className="text-xs sm:text-sm text-[#7E7F7D] mt-0.5">
+                  A quick snapshot of your group's performance and risk level.
+                </p>
               </div>
 
-              {/* On-Time Payments */}
-              <div className="bg-white rounded-[10px] border border-[#F0EBE1] p-2 flex items-center gap-3">
-                <div className="w-12 h-12 rounded-[8px] bg-[#EAF7EE] flex items-center justify-center shrink-0">
-                  <Calendar className="w-6 h-6 text-[#16A34A]" />
+              {/* 4 Metric Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {/* Contribution Rate */}
+                <div className="bg-white rounded-[10px] border border-[#F0EBE1] p-2 flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-[8px] bg-[#EAF7EE] flex items-center justify-center shrink-0">
+                    <GoDatabase className="w-6 h-6 text-[#16A34A]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#7E7F7D] font-medium">
+                      Contribution Rate
+                    </p>
+                    <p className="text-lg font-bold text-[#1A2E26]">
+                      {activeCycle.val}%
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-[#7E7F7D] font-medium">
-                    On-Time Payments
-                  </p>
-                  <p className="text-lg font-bold text-[#1A2E26]">11 of 12</p>
-                </div>
-              </div>
 
-              {/* Active Members */}
-              <div className="bg-white rounded-[10px] border border-[#F0EBE1] p-2 flex items-center gap-3">
-                <div className="w-12 h-12 rounded-[8px] bg-[#EAF7EE] flex items-center justify-center shrink-0">
-                  <Users className="w-6 h-6 text-[#16A34A]" />
+                {/* On-Time Payments */}
+                <div className="bg-white rounded-[10px] border border-[#F0EBE1] p-2 flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-[8px] bg-[#EAF7EE] flex items-center justify-center shrink-0">
+                    <Calendar className="w-6 h-6 text-[#16A34A]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#7E7F7D] font-medium">
+                      On-Time Payments
+                    </p>
+                    <p className="text-lg font-bold text-[#1A2E26]">
+                      {activeCycle.onTime || "11 of 12"}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-[#7E7F7D] font-medium">
-                    Active Members
-                  </p>
-                  <p className="text-lg font-bold text-[#1A2E26]">12</p>
-                </div>
-              </div>
 
-              {/* Group Health */}
-              <div className="bg-white rounded-[10px] border border-[#F0EBE1] p-2 flex items-center gap-3">
-                <div className="w-12 h-12 rounded-[8px] bg-[#EAF7EE] flex items-center justify-center shrink-0">
-                  <Activity className="w-6 h-6 text-[#16A34A]" />
+                {/* Active Members */}
+                <div className="bg-white rounded-[10px] border border-[#F0EBE1] p-2 flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-[8px] bg-[#EAF7EE] flex items-center justify-center shrink-0">
+                    <Users className="w-6 h-6 text-[#16A34A]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#7E7F7D] font-medium">
+                      Active Members
+                    </p>
+                    <p className="text-lg font-bold text-[#1A2E26]">
+                      {group?.membersCount || 12}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-[#7E7F7D] font-medium">
-                    Group Health
-                  </p>
-                  <p className="text-lg font-bold text-[#1A2E26]">Healthy</p>
+
+                {/* Group Health */}
+                <div className="bg-white rounded-[10px] border border-[#F0EBE1] p-2 flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-[8px] bg-[#EAF7EE] flex items-center justify-center shrink-0">
+                    <Activity className="w-6 h-6 text-[#16A34A]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#7E7F7D] font-medium">
+                      Group Health
+                    </p>
+                    <p className="text-lg font-bold text-[#1A2E26]">
+                      {isHealthy ? "Healthy" : isFair ? "Fair" : "At Risk"}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
             {/* Health Trend Card */}
             <div className="bg-white rounded-2xl border border-[#F0EBE1] p-5 sm:p-6 space-y-4">
-              <div>
-                <h4 className="text-base font-bold text-[#1A2E26]">
-                  Health Trend
-                </h4>
-                <p className="text-xs text-[#7E7F7D] mt-0.5">
-                  Group performance over the group cycles.
-                </p>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <h4 className="text-base font-bold text-[#1A2E26]">
+                    Health Trend
+                  </h4>
+                  <p className="text-xs text-[#7E7F7D] mt-0.5">
+                    Group performance over the group cycles. Click any cycle to inspect details.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="flex items-center gap-1.5 text-[#7E7F7D]">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#0B5D4B]" /> Selected: <strong className="text-[#1A2E26]">{activeCycle.label} ({activeCycle.val}%)</strong>
+                  </span>
+                </div>
               </div>
 
               {/* Bar Chart */}
@@ -2486,50 +2598,64 @@ export default function ManageGroupView({ group, onBack }) {
                     <div className="absolute left-8 right-0 top-3/4 border-b border-dashed border-[#F0EBE1]" />
 
                     {/* Bars */}
-                    {[
-                      { label: "Cycle 1", val: 92 },
-                      { label: "Cycle 1", val: 100 },
-                      { label: "Cycle 1", val: 92 },
-                      { label: "Cycle 1", val: 100 },
-                      { label: "Cycle 1", val: 100 },
-                      { label: "Cycle 1", val: 100 },
-                      { label: "Cycle 1", val: 92 },
-                      { label: "Cycle 1", val: 100 },
-                    ].map((bar, idx) => (
-                      <div
-                        key={idx}
-                        className="flex-1 flex flex-col items-center justify-end h-full relative z-10 group"
-                      >
-                        <span className="text-[10px] sm:text-xs font-semibold text-[#1A2E26] mb-1">
-                          {bar.val}%
-                        </span>
+                    {healthCycles.map((bar, idx) => {
+                      const isSelected = selectedCycleIndex === idx;
+                      const isHovered = hoveredCycleIndex === idx;
+                      return (
                         <div
-                          style={{ height: `${bar.val}%` }}
-                          className="w-full max-w-[48px] bg-[#0B5D4B] rounded-t-md hover:bg-[#073529] transition-all"
-                        />
-                      </div>
-                    ))}
+                          key={idx}
+                          onClick={() => setSelectedCycleIndex(idx)}
+                          onMouseEnter={() => setHoveredCycleIndex(idx)}
+                          onMouseLeave={() => setHoveredCycleIndex(null)}
+                          className="flex-1 flex flex-col items-center justify-end h-full relative z-10 group cursor-pointer"
+                        >
+                          {/* Tooltip on hover */}
+                          {isHovered && (
+                            <div className="absolute -top-12 z-30 bg-[#1A2E26] text-white text-[11px] font-medium py-1 px-2.5 rounded-lg shadow-lg whitespace-nowrap pointer-events-none transition-all">
+                              <div className="font-bold text-center">{bar.label}</div>
+                              <div className="text-[10px] text-[#A3E635]">₦{bar.collected.toLocaleString()} / ₦{bar.expected.toLocaleString()}</div>
+                            </div>
+                          )}
+
+                          <span
+                            className={`text-[10px] sm:text-xs font-semibold mb-1 transition-colors ${
+                              isSelected ? "text-[#0B5D4B] font-bold" : "text-[#1A2E26]"
+                            }`}
+                          >
+                            {bar.val}%
+                          </span>
+                          <div
+                            style={{ height: `${bar.val}%` }}
+                            className={`w-full max-w-[48px] rounded-t-md transition-all duration-300 ${
+                              isSelected
+                                ? "bg-[#073529] shadow-md ring-2 ring-[#0B5D4B]/40"
+                                : "bg-[#0B5D4B] hover:bg-[#073529]"
+                            }`}
+                          />
+                        </div>
+                      );
+                    })}
                   </div>
 
                   {/* X Axis Labels */}
                   <div className="flex gap-2 sm:gap-4 pl-8 pt-2">
-                    {[
-                      "Cycle 1",
-                      "Cycle 1",
-                      "Cycle 1",
-                      "Cycle 1",
-                      "Cycle 1",
-                      "Cycle 1",
-                      "Cycle 1",
-                      "Cycle 1",
-                    ].map((cycle, idx) => (
-                      <div
-                        key={idx}
-                        className="flex-1 text-center text-[10px] sm:text-xs font-medium text-[#7E7F7D]"
-                      >
-                        {cycle}
-                      </div>
-                    ))}
+                    {healthCycles.map((cycle, idx) => {
+                      const isSelected = selectedCycleIndex === idx;
+                      return (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setSelectedCycleIndex(idx)}
+                          className={`flex-1 text-center text-[10px] sm:text-xs transition-colors py-1 rounded cursor-pointer ${
+                            isSelected
+                              ? "font-bold text-[#0B5D4B] bg-[#EAF7EE]"
+                              : "font-medium text-[#7E7F7D] hover:text-[#1A2E26]"
+                          }`}
+                        >
+                          {cycle.label}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -2537,13 +2663,24 @@ export default function ManageGroupView({ group, onBack }) {
 
             {/* Current Cycle Status Card */}
             <div className="bg-white rounded-2xl border border-[#F0EBE1] p-5 sm:p-6 space-y-4">
-              <div>
-                <h4 className="text-base font-bold text-[#1A2E26]">
-                  Current Cycle Status
-                </h4>
-                <p className="text-xs text-[#7E7F7D] mt-0.5">
-                  A glance for the ongoing cycle.
-                </p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-base font-bold text-[#1A2E26]">
+                    Current Cycle Status {selectedCycleIndex !== healthCycles.length - 1 ? `(${activeCycle.label})` : ""}
+                  </h4>
+                  <p className="text-xs text-[#7E7F7D] mt-0.5">
+                    A glance for the {selectedCycleIndex === healthCycles.length - 1 ? "ongoing" : activeCycle.label.toLowerCase()} cycle.
+                  </p>
+                </div>
+                {selectedCycleIndex !== healthCycles.length - 1 && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCycleIndex(healthCycles.length - 1)}
+                    className="text-xs font-semibold text-[#0B5D4B] hover:underline bg-[#EAF7EE] px-2.5 py-1 rounded-md transition-colors"
+                  >
+                    Reset to Ongoing Cycle
+                  </button>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center pt-2">
@@ -2568,17 +2705,17 @@ export default function ManageGroupView({ group, onBack }) {
                         cx="80"
                         cy="80"
                         r="64"
-                        className="stroke-[#0B5D4B]"
+                        className="stroke-[#0B5D4B] transition-all duration-500 ease-out"
                         strokeWidth="14"
-                        strokeDasharray={2 * Math.PI * 64}
-                        strokeDashoffset="0"
+                        strokeDasharray={circumference}
+                        strokeDashoffset={strokeOffset}
                         strokeLinecap="round"
                         fill="transparent"
                       />
                     </svg>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <span className="text-2xl sm:text-3xl font-bold text-[#1A2E26]">
-                        100%
+                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                      <span className="text-2xl sm:text-3xl font-bold text-[#1A2E26] transition-all">
+                        {collectedPercent}%
                       </span>
                       <span className="text-xs font-medium text-[#7E7F7D]">
                         Collected
@@ -2592,60 +2729,52 @@ export default function ManageGroupView({ group, onBack }) {
                   {/* Expected Contributions */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      
-                        <GoDatabase className="w-5 h-5" color="green"/>
-                    
+                      <GoDatabase className="w-5 h-5 text-[#16A34A]" />
                       <span className="text-xs sm:text-sm font-medium text-[#1A2E26]">
                         Expected Contributions
                       </span>
                     </div>
                     <span className="text-xs sm:text-sm font-bold text-[#1A2E26]">
-                      ₦600,000
+                      ₦{activeCycle.expected.toLocaleString()}
                     </span>
                   </div>
 
                   {/* Collected */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      
-                        <CheckCircle2 className="w-5 h-5" color="green"/>
-                    
+                      <CheckCircle2 className="w-5 h-5 text-[#16A34A]" />
                       <span className="text-xs sm:text-sm font-medium text-[#1A2E26]">
                         Collected
                       </span>
                     </div>
                     <span className="text-xs sm:text-sm font-bold text-[#1A2E26]">
-                      ₦600,000
+                      ₦{activeCycle.collected.toLocaleString()}
                     </span>
                   </div>
 
                   {/* Pending */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                     
-                        <Clock className="w-5 h-5" color="orange"/>
-                      
+                      <Clock className="w-5 h-5 text-[#F59E0B]" />
                       <span className="text-xs sm:text-sm font-medium text-[#1A2E26]">
                         Pending
                       </span>
                     </div>
                     <span className="text-xs sm:text-sm font-bold text-[#1A2E26]">
-                      ₦0
+                      {activeCycle.pending === 0 ? "₦0" : `₦${activeCycle.pending.toLocaleString()}`}
                     </span>
                   </div>
 
                   {/* Overdue */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      
-                        <XCircle className="w-5 h-5" color="red"/>
-               
+                      <XCircle className="w-5 h-5 text-[#EF4444]" />
                       <span className="text-xs sm:text-sm font-medium text-[#1A2E26]">
                         Overdue
                       </span>
                     </div>
                     <span className="text-xs sm:text-sm font-bold text-[#1A2E26]">
-                      ₦0
+                      {activeCycle.overdue === 0 ? "₦0" : `₦${activeCycle.overdue.toLocaleString()}`}
                     </span>
                   </div>
                 </div>
@@ -2653,21 +2782,43 @@ export default function ManageGroupView({ group, onBack }) {
             </div>
 
             {/* Group Status Banner */}
-            <div className="bg-[#31C0503D] rounded-2xl p-5 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#DCFCE7] flex items-center justify-center text-[#0B6B40] shrink-0">
+            <div
+              className={`rounded-2xl p-5 flex items-center gap-4 transition-colors ${
+                isHealthy
+                  ? "bg-[#31C0503D]"
+                  : isFair
+                  ? "bg-[#FEF3C7]"
+                  : "bg-[#FEE2E2]"
+              }`}
+            >
+              <div
+                className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${
+                  isHealthy
+                    ? "bg-[#DCFCE7] text-[#0B6B40]"
+                    : isFair
+                    ? "bg-[#FDE68A] text-[#92400E]"
+                    : "bg-[#FECACA] text-[#DC2626]"
+                }`}
+              >
                 <ShieldCheck className="w-10 h-10" />
               </div>
               <div>
                 <h4 className="text-base sm:text-lg font-bold text-[#000000]">
-                  Group Status: <span className="font-bold">Healthy</span>
+                  Group Status:{" "}
+                  <span className="font-bold">
+                    {isHealthy ? "Healthy" : isFair ? "Fair" : "Needs Review"}
+                  </span>
                 </h4>
                 <p className="text-xs sm:text-sm text-[#1A2E26] mt-0.5 font-medium">
-                  Contributions are on track and the group is in good standing.
+                  {isHealthy
+                    ? "Contributions are on track and the group is in good standing."
+                    : `Collection rate is at ${activeCycle.val}%. Reminders sent for remaining balance.`}
                 </p>
               </div>
             </div>
           </div>
-        )}
+        );
+      })()}
 
         {/* ============== DISPUTES TAB (IMAGE 1) ============== */}
         {activeTab === "Disputes" && (

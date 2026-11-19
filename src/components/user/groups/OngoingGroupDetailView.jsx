@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ChevronLeft,
   Users,
@@ -15,10 +15,212 @@ import {
 } from "lucide-react";
 import { IoRepeat } from "react-icons/io5";
 import { FaWhatsapp } from "react-icons/fa";
-import { GoCheckCircleFill } from "react-icons/go";
+import { GoAlert, GoCheckCircleFill, GoDatabase } from "react-icons/go";
+import { SlRefresh } from "react-icons/sl";
+import DisputesListView from "./DisputesListView";
+import RaiseDisputeView from "./RaiseDisputeView";
+import DisputeDetailView from "./DisputeDetailView";
+import { ArrowRight } from "lucide-react";
 
 export default function OngoingGroupDetailView({ group, onBack, onNavigate }) {
   const g = group;
+
+  // Disputes state
+  const defaultDisputes = [
+    {
+      id: "DSP-00124",
+      category: "Group Rules",
+      subject: "Disagreement on payout order",
+      date: "Nov 14, 2026, 10:24 AM",
+      status: "New",
+      description:
+        "I disagree with the current payout order. Based on our group agreement, it should be my turn this cycle.",
+      evidence: [
+        { name: "Group_agreement.png", type: "PNG", size: "412 KB" },
+      ],
+      groupContext: {
+        group: g?.name || "Yaba Ajo Group",
+        contributionCycle: "Monthly",
+        payoutOrder: "Member 4 of 20",
+      },
+      timeline: [
+        {
+          title: "Dispute Submitted",
+          description: "Your dispute was received.",
+          date: "Nov 14, 2026, 10:24 AM",
+          status: "completed",
+        },
+        {
+          title: "Under Review",
+          description: "The Group Admin is reviewing your complaint.",
+          date: "Nov 14, 2026, 10:24 AM",
+          status: "current",
+        },
+        {
+          title: "Resolved",
+          description: "A decision has been made on your dispute.",
+          date: "Nov 14, 2026, 10:24 AM",
+          status: "resolved",
+        },
+      ],
+    },
+    {
+      id: "DSP-00124",
+      category: "Group Rules",
+      subject: "Disagreement on payout order",
+      date: "Nov 14, 2026, 10:24 AM",
+      status: "New",
+    },
+    {
+      id: "DSP-00124",
+      category: "Group Rules",
+      subject: "Disagreement on payout order",
+      date: "Nov 14, 2026, 10:24 AM",
+      status: "New",
+    },
+    {
+      id: "DSP-00124",
+      category: "Group Rules",
+      subject: "Disagreement on payout order",
+      date: "Nov 14, 2026, 10:24 AM",
+      status: "New",
+    },
+    {
+      id: "DSP-00124",
+      category: "Group Rules",
+      subject: "Disagreement on payout order",
+      date: "Nov 14, 2026, 10:24 AM",
+      status: "New",
+    },
+    {
+      id: "DSP-00124",
+      category: "Group Rules",
+      subject: "Disagreement on payout order",
+      date: "Nov 14, 2026, 10:24 AM",
+      status: "New",
+    },
+  ];
+
+  const [disputesList, setDisputesList] = useState(
+    () => g?.disputes || defaultDisputes
+  );
+  const [disputesView, setDisputesView] = useState(null); // null | "list" | "raise" | "detail"
+  const [selectedDispute, setSelectedDispute] = useState(null);
+
+  const handleRaiseDisputeSubmit = (data) => {
+    const now = new Date();
+    const dateFormatted =
+      now.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }) +
+      ", " +
+      now.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      });
+
+    const randomNum = Math.floor(100 + Math.random() * 900);
+    const newId = `DSP-00${randomNum}`;
+
+    const newDispute = {
+      id: newId,
+      category: data.category || "Group Rules",
+      subject: data.subject || "Dispute",
+      description: data.description || "",
+      date: dateFormatted,
+      status: "New",
+      evidence: data.file
+        ? [
+            {
+              name: data.file.name,
+              type: data.file.name.split(".").pop()?.toUpperCase() || "PNG",
+              size: `${Math.max(1, Math.round(data.file.size / 1024))} KB`,
+              url: URL.createObjectURL(data.file),
+              fileObj: data.file,
+            },
+          ]
+        : [],
+      groupContext: {
+        group: g?.name || "Unity Ajo Group",
+        contributionCycle: g?.rules?.contributionFrequency || "Monthly",
+        payoutOrder: g?.payoutPosition || "Member 4 of 20",
+      },
+      timeline: [
+        {
+          title: "Dispute Submitted",
+          description: "Your dispute was received.",
+          date: dateFormatted,
+          status: "completed",
+        },
+        {
+          title: "Under Review",
+          description: "The Group Admin is reviewing your complaint.",
+          date: dateFormatted,
+          status: "current",
+        },
+        {
+          title: "Resolved",
+          description: "A decision has been made on your dispute.",
+          date: dateFormatted,
+          status: "resolved",
+        },
+      ],
+    };
+
+    const updated = [newDispute, ...disputesList];
+    if (g) g.disputes = updated;
+    setDisputesList(updated);
+    setDisputesView("list");
+  };
+
+  // Disputes sub-views
+  if (disputesView === "list") {
+    return (
+      <DisputesListView
+        group={g}
+        disputes={disputesList}
+        onBack={() => setDisputesView(null)}
+        onRaiseDispute={() => setDisputesView("raise")}
+        onViewDispute={(dispute) => {
+          setSelectedDispute(dispute);
+          setDisputesView("detail");
+        }}
+      />
+    );
+  }
+
+  if (disputesView === "raise") {
+    return (
+      <RaiseDisputeView
+        onBack={() => setDisputesView("list")}
+        onSubmit={handleRaiseDisputeSubmit}
+      />
+    );
+  }
+
+  if (disputesView === "detail") {
+    return (
+      <DisputeDetailView
+        dispute={selectedDispute}
+        group={g}
+        onBack={() => setDisputesView("list")}
+      />
+    );
+  }
+
+  const totalContributions = g.members || 12;
+  const completionPercentage =
+    g.groupHealth?.contributionCompletion ?? g.cycleProgress ?? 33;
+  const countContributed =
+    g.groupHealth?.amountContributed ??
+    Math.round((completionPercentage / 100) * totalContributions);
+  const totalExpected = g.groupHealth?.wholeContribution ?? totalContributions;
+  const completionFractionText = g.groupHealth?.completionFraction
+    ? g.groupHealth.completionFraction.replace(/Builders/i, "contributions")
+    : `${countContributed} of ${totalExpected} contributions`;
 
   return (
     <div
@@ -279,7 +481,7 @@ export default function OngoingGroupDetailView({ group, onBack, onNavigate }) {
                 Contribution completion
               </span>
               <span className="text-[11px] text-[#9CA3AF] block">
-                {g.groupHealth?.completionFraction || "4 of 12 contributions"}
+                {completionFractionText}
               </span>
             </div>
           </div>
@@ -380,7 +582,7 @@ export default function OngoingGroupDetailView({ group, onBack, onNavigate }) {
           <div className="space-y-0">
             {[
               {
-                icon: CreditCard,
+                icon: GoDatabase,
                 label: "Contribution amount",
                 value: g.rules.contributionAmount,
               },
@@ -390,12 +592,12 @@ export default function OngoingGroupDetailView({ group, onBack, onNavigate }) {
                 value: g.rules.contributionFrequency,
               },
               {
-                icon: TrendingUp,
+                icon: SlRefresh,
                 label: "Payout method",
                 value: g.rules.payoutMethod,
               },
               {
-                icon: Clock,
+                icon: GoAlert,
                 label: "Late payment rule",
                 value: g.rules.latePaymentRule,
               },
@@ -422,6 +624,25 @@ export default function OngoingGroupDetailView({ group, onBack, onNavigate }) {
                 </span>
               </div>
             ))}
+          </div>
+
+          {/* Having an issue? Card */}
+          <div className="mt-4 bg-[#FDFBF7] border border-[#F0EDE6] rounded-md p-3 sm:p-4 flex items-center justify-between gap-2 sm:gap-3">
+            <div>
+              <span className="text-xs sm:text-sm font-semibold text-[#111827] block">
+                Having an issue with this group?
+              </span>
+              <span className="text-[11px] sm:text-xs text-[#737373] block mt-0.5">
+                Report a dispute or track an existing one.
+              </span>
+            </div>
+            <button
+              onClick={() => setDisputesView("list")}
+              className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#0B5D4B] hover:text-[#064335] transition-colors cursor-pointer shrink-0"
+            >
+              <span>Disputes</span>
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </button>
           </div>
         </div>
       </div>

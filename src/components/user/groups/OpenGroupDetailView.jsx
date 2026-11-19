@@ -9,6 +9,8 @@ import {
   FileText,
 } from "lucide-react";
 import { IoRepeat } from "react-icons/io5";
+import { GoAlert } from "react-icons/go";
+import { SlRefresh } from "react-icons/sl";
 
 export default function OpenGroupDetailView({
   group,
@@ -278,12 +280,12 @@ export default function OpenGroupDetailView({
                   value: "Monthly",
                 },
                 {
-                  icon: IoRepeat,
+                  icon: SlRefresh,
                   label: "Payout method",
                   value: "Rotational (turn-by-turn)",
                 },
                 {
-                  icon: AlertCircle,
+                  icon: GoAlert,
                   label: "Late payment rule",
                   value: "₦2,000 late fee after 3 days",
                 },
