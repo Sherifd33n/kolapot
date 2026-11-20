@@ -246,10 +246,10 @@ export default function GroupManagementView({ onViewGroup }) {
                 <Icon className="w-6 h-6" />
               </div>
               <div className="min-w-0 flex-1">
-                <span className="text-xs text-[#595959] font-medium block truncate">
+                <span className="text-xs text-[#595959] font-medium block">
                   {s.label}
                 </span>
-                <span className="text-xl sm:text-2xl font-bold text-[#111827] block leading-tight mt-0.5 truncate">
+                <span className="text-xl sm:text-2xl font-bold text-[#111827] block leading-tight mt-0.5">
                   {s.value}
                 </span>
               </div>

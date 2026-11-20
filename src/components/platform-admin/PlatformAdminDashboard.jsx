@@ -130,7 +130,7 @@ export default function PlatformAdminDashboard({
       />
 
       {/* MAIN CONTENT AREA */}
-      <main className="flex-1 lg:ml-64 min-w-0 w-full max-w-full px-3 sm:px-6 lg:px-8 pt-18 lg:pt-6 pb-12 space-y-6 overflow-x-hidden">
+      <main className="flex-1 lg:ml-64 min-w-0 w-full max-w-full px-3 sm:px-6 lg:px-8 pt-[74px] lg:pt-6 pb-12 space-y-6 overflow-x-hidden">
         {/* Dynamic Content Views */}
         <div
           key={`${activeTab}-${selectedUser ? "user-detail" : selectedGroup ? "group-detail" : selectedDispute ? "dispute-detail" : selectedSupportRequest ? "support-detail" : "list"}`}

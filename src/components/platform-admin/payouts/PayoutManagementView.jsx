@@ -252,11 +252,11 @@ export default function PayoutManagementView() {
                 <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium text-[#737373] truncate">{card.label}</p>
-                <p className="text-xl sm:text-2xl font-bold text-[#111827] mt-0.5 truncate">
+                <p className="text-xs font-medium text-[#737373]">{card.label}</p>
+                <p className="text-xl sm:text-2xl font-bold text-[#111827] mt-0.5">
                   {card.value}
                 </p>
-                <p className="text-xs text-[#737373] mt-0.5 truncate">{card.sub}</p>
+                <p className="text-xs text-[#737373] mt-0.5">{card.sub}</p>
               </div>
             </div>
           );

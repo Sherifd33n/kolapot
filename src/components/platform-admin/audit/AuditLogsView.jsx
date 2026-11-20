@@ -271,18 +271,18 @@ export default function AuditLogsView() {
 
       {/* TABLE */}
       <div className="bg-white rounded-xl border border-[#F3EFEA] shadow-xs overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto w-full max-w-full">
+          <table className="w-full text-left border-collapse min-w-[850px]">
             <thead>
               <tr className="bg-[#EAF0EE] text-[#111827] text-xs font-semibold uppercase tracking-wider">
-                <th className="py-3 px-4">Date & Time</th>
-                <th className="py-3 px-4">User</th>
-                <th className="py-3 px-4">Role</th>
-                <th className="py-3 px-4">Action</th>
-                <th className="py-3 px-4">Module</th>
-                <th className="py-3 px-4">Details</th>
-                <th className="py-3 px-4">IP Address</th>
-                <th className="py-3 px-4">Device</th>
+                <th className="py-3 px-4 whitespace-nowrap">Date & Time</th>
+                <th className="py-3 px-4 whitespace-nowrap">User</th>
+                <th className="py-3 px-4 whitespace-nowrap">Role</th>
+                <th className="py-3 px-4 whitespace-nowrap">Action</th>
+                <th className="py-3 px-4 whitespace-nowrap">Module</th>
+                <th className="py-3 px-4 whitespace-nowrap">Details</th>
+                <th className="py-3 px-4 whitespace-nowrap">IP Address</th>
+                <th className="py-3 px-4 whitespace-nowrap">Device</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#F3EFEA] text-xs text-[#111827]">

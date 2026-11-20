@@ -202,13 +202,13 @@ export default function WalletView() {
                 <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="min-w-0 flex-1">
-                <span className="text-xs text-[#737373] font-medium block truncate">
+                <span className="text-xs text-[#737373] font-medium block">
                   {s.label}
                 </span>
-                <span className="text-xl sm:text-2xl font-bold text-[#111827] block leading-tight mt-0.5 truncate">
+                <span className="text-xl sm:text-2xl font-bold text-[#111827] block leading-tight mt-0.5">
                   {s.value}
                 </span>
-                <span className="text-xs text-[#737373] block mt-0.5 truncate">
+                <span className="text-xs text-[#737373] block mt-0.5">
                   {s.sub}
                 </span>
               </div>
