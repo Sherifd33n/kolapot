@@ -21,6 +21,9 @@ import Dashboard from "./components/user/Dashboard";
 // --- Admin Portal (Group Admin & Operations) ---
 import AdminDashboard from "./components/admin/AdminDashboard";
 
+// --- Overall Admin Portal (Platform Admin / Super Admin) ---
+import PlatformAdminDashboard from "./components/platform-admin/PlatformAdminDashboard";
+
 export default function App() {
   const getInitialPage = () => {
     const hash = (typeof window !== "undefined" ? window.location.hash : "").toLowerCase();
@@ -31,6 +34,12 @@ export default function App() {
     if (full.includes("signup") || full.includes("register")) return "signup";
     if (full.includes("verify") && !full.includes("verified")) return "verify";
     if (full.includes("verified")) return "verified";
+    if (
+      full.includes("platform-admin") ||
+      full.includes("super-admin") ||
+      full.includes("overall-admin")
+    )
+      return "platform-admin";
     if (full.includes("admin") || full.includes("create-group")) return "admin";
     if (
       full.includes("dashboard") ||
@@ -67,6 +76,12 @@ export default function App() {
         setCurrentPage("verify");
       } else if (full.includes("verified")) {
         setCurrentPage("verified");
+      } else if (
+        full.includes("platform-admin") ||
+        full.includes("super-admin") ||
+        full.includes("overall-admin")
+      ) {
+        setCurrentPage("platform-admin");
       } else if (full.includes("admin") || full.includes("create-group")) {
         setCurrentPage("admin");
       } else if (
@@ -132,9 +147,14 @@ export default function App() {
     return <Dashboard onNavigate={handleNavigate} />;
   }
 
-  // Render Admin Dashboard (Independent)
+  // Render Admin Dashboard (Group Admin)
   if (currentPage === "admin") {
     return <AdminDashboard onNavigate={handleNavigate} />;
+  }
+
+  // Render Platform Admin Dashboard (Overall Admin / Super Admin)
+  if (currentPage === "platform-admin") {
+    return <PlatformAdminDashboard onNavigate={handleNavigate} />;
   }
 
   // Render Sign In Page

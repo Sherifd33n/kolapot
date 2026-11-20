@@ -15,3 +15,8 @@ export * as AuthModule from "./auth";
 // 4. Public Landing Page
 export * as LandingModule from "./landing";
 
+// 5. Overall Admin Portal (Super Admin / Platform Admin Experience)
+export * as PlatformAdminPortal from "./platform-admin";
+export { default as PlatformAdminDashboard } from "./platform-admin/PlatformAdminDashboard";
+
+

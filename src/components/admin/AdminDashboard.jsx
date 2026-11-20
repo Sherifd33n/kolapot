@@ -5,6 +5,9 @@ import Settings from "../user/Settings";
 import AdminSidebar from "./AdminSidebar";
 import AdminHomeView from "./AdminHomeView";
 import AdminGroupsView from "./AdminGroupsView";
+import AdminContributionsView from "./AdminContributionsView";
+import AdminPayoutsView from "./AdminPayoutsView";
+import AdminWalletView from "./AdminWalletView";
 import { Users, ChevronDown, Clock, Menu } from "lucide-react";
 
 export default function AdminDashboard({ onNavigate, initialTab = "Home" }) {
@@ -114,53 +117,17 @@ export default function AdminDashboard({ onNavigate, initialTab = "Home" }) {
               onViewChange={setAdminGroupsView}
             />
           ) : activeTab === "Contributions" ? (
-            <div className="bg-white rounded-xl p-12 shadow-xl text-center space-y-4 max-w-lg mx-auto my-12">
-              <div className="w-16 h-16 rounded-full bg-[#0B5D4B26] text-[#064335] flex items-center justify-center mx-auto">
-                <Clock className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-[#000000]">Admin Contributions</h3>
-              <p className="text-sm text-[#7E7F7D]">
-                This section is currently under development. Check back soon for updates!
-              </p>
-              <button
-                onClick={() => setActiveTab("Home")}
-                className="px-5 py-2.5 bg-[#064335] text-white text-sm font-semibold rounded-xl hover:bg-[#0B5D4B] transition-colors"
-              >
-                Back to Home
-              </button>
-            </div>
+            <AdminContributionsView
+              onNavigate={onNavigate}
+              onSwitchToGroups={() => setActiveTab("Groups")}
+            />
           ) : activeTab === "Payouts" ? (
-            <div className="bg-white rounded-xl p-12 shadow-xl text-center space-y-4 max-w-lg mx-auto my-12">
-              <div className="w-16 h-16 rounded-full bg-[#0B5D4B26] text-[#064335] flex items-center justify-center mx-auto">
-                <Clock className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-[#000000]">Admin Payouts</h3>
-              <p className="text-sm text-[#7E7F7D]">
-                This section is currently under development. Check back soon for updates!
-              </p>
-              <button
-                onClick={() => setActiveTab("Home")}
-                className="px-5 py-2.5 bg-[#064335] text-white text-sm font-semibold rounded-xl hover:bg-[#0B5D4B] transition-colors"
-              >
-                Back to Home
-              </button>
-            </div>
+            <AdminPayoutsView
+              onNavigate={onNavigate}
+              onSwitchToGroups={() => setActiveTab("Groups")}
+            />
           ) : activeTab === "Wallet" ? (
-            <div className="bg-white rounded-xl p-12 shadow-xl text-center space-y-4 max-w-lg mx-auto my-12">
-              <div className="w-16 h-16 rounded-full bg-[#0B5D4B26] text-[#064335] flex items-center justify-center mx-auto">
-                <Clock className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-[#000000]">Admin Wallet</h3>
-              <p className="text-sm text-[#7E7F7D]">
-                This section is currently under development. Check back soon for updates!
-              </p>
-              <button
-                onClick={() => setActiveTab("Home")}
-                className="px-5 py-2.5 bg-[#064335] text-white text-sm font-semibold rounded-xl hover:bg-[#0B5D4B] transition-colors"
-              >
-                Back to Home
-              </button>
-            </div>
+            <AdminWalletView onNavigate={onNavigate} />
           ) : activeTab === "Notifications" ? (
             <Notifications onNavigate={onNavigate} />
           ) : activeTab === "Help" ? (
